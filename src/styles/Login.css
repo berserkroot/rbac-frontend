@@ -1,0 +1,494 @@
+/* ============================================
+   LOGIN PAGE - STYLESHEET INDEPENDIENTE
+   ============================================ */
+
+.login-page-animated {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: #0f172a;
+}
+
+/* ============================================
+   FONDO ANIMADO CON ÓRBITAS ALEATORIAS
+   ============================================ */
+
+.animated-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.5;
+  will-change: transform;
+}
+
+/* Orbe 1 - Morado: se mueve solo por la esquina superior izquierda */
+.orb-1 {
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  animation: orbit-corner-tl 25s infinite ease-in-out;
+  top: -200px;
+  left: -200px;
+}
+
+/* Orbe 2 - Rosa: se mueve solo por la esquina inferior derecha */
+.orb-2 {
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  animation: orbit-corner-br 30s infinite ease-in-out;
+  bottom: -150px;
+  right: -150px;
+}
+
+/* Orbe 3 - Azul: se mueve por los bordes laterales, sin cruzar el centro */
+.orb-3 {
+  width: 350px;
+  height: 350px;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  animation: orbit-perimeter 20s infinite ease-in-out;
+  top: 50%;
+  left: -300px;
+  transform: translateY(-50%);
+}
+
+/* Animación para esquina superior izquierda */
+@keyframes orbit-corner-tl {
+  0% { transform: translate(0, 0); }
+  30% { transform: translate(100px, 100px); }
+  60% { transform: translate(50px, 200px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Animación para esquina inferior derecha */
+@keyframes orbit-corner-br {
+  0% { transform: translate(0, 0); }
+  35% { transform: translate(-100px, -100px); }
+  70% { transform: translate(-200px, -50px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Animación que recorre los bordes izquierdo y derecho sin invadir el centro */
+@keyframes orbit-perimeter {
+  0% { left: -300px; top: 50%; transform: translateY(-50%); }
+  25% { left: -100px; top: 20%; transform: translateY(0); }
+  50% { left: calc(100% + 100px); top: 80%; transform: translateY(-50%); }
+  75% { left: calc(100% + 50px); top: 30%; transform: translateY(-100%); }
+  100% { left: -300px; top: 50%; transform: translateY(-50%); }
+}
+
+.grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+/* ============================================
+   BOTÓN VOLVER
+   ============================================ */
+
+.back-to-landing {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50px;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.back-to-landing:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateX(-4px);
+}
+
+/* ============================================
+   CONTENEDOR Y CARD
+   ============================================ */
+
+.login-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  padding: 20px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Card con Glassmorphism - ahora con fondo más opaco para ocultar cualquier residuo de orbes */
+.login-card-glass {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 48px 40px;
+  box-shadow: 
+    0 25px 50px -12px rgba(0,0,0,0.5),
+    0 0 0 1px rgba(255,255,255,0.1) inset;
+}
+
+/* ============================================
+   HEADER Y LOGO
+   ============================================ */
+
+.login-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.login-logo {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.logo-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+  transition: transform 0.3s ease;
+}
+
+.logo-image:hover {
+  transform: scale(1.05);
+}
+
+.login-header h1 {
+  color: white;
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.login-header p {
+  color: rgba(255,255,255,0.6);
+  font-size: 15px;
+  margin: 0;
+}
+
+/* ============================================
+   ERROR MESSAGE
+   ============================================ */
+
+.login-error-animated {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: rgba(220, 38, 38, 0.2);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  border-radius: 12px;
+  color: #fecaca;
+  font-size: 14px;
+  margin-bottom: 24px;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+/* ============================================
+   FORMULARIO
+   ============================================ */
+
+.login-form-modern {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group label {
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  font-weight: 500;
+  padding-left: 4px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 16px;
+  color: rgba(255,255,255,0.4);
+  pointer-events: none;
+  transition: color 0.3s;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 14px 16px 14px 48px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  color: white;
+  font-size: 15px;
+  transition: all 0.3s;
+  outline: none;
+}
+
+.input-wrapper input::placeholder {
+  color: rgba(255,255,255,0.3);
+}
+
+.input-wrapper input:focus {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(102, 126, 234, 0.5);
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.input-wrapper input:focus + .input-icon {
+  color: #667eea;
+}
+
+/* ============================================
+   OPCIONES
+   ============================================ */
+
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+}
+
+.remember-me input {
+  width: 16px;
+  height: 16px;
+  accent-color: #667eea;
+  cursor: pointer;
+}
+
+.forgot-password {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.forgot-password:hover {
+  color: #764ba2;
+}
+
+/* ============================================
+   BOTÓN LOGIN
+   ============================================ */
+
+.btn-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 10px 30px -10px rgba(102, 126, 234, 0.5);
+  margin-top: 8px;
+}
+
+.btn-login:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -10px rgba(102, 126, 234, 0.6);
+}
+
+.btn-login:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-login.loading {
+  background: linear-gradient(135deg, #4c5d9e 0%, #5a4075 100%);
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   CREDENCIALES DEMO
+   ============================================ */
+
+.demo-credentials {
+  margin-top: 32px;
+}
+
+.divider {
+  position: relative;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+}
+
+.divider span {
+  position: relative;
+  background: rgba(15, 23, 42, 0.8);
+  padding: 0 12px;
+  color: rgba(255,255,255,0.5);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.credentials-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+}
+
+.credential-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255,255,255,0.6);
+  font-size: 13px;
+}
+
+.credential-item code {
+  background: rgba(255,255,255,0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: white;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 12px;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.login-footer {
+  text-align: center;
+  margin-top: 32px;
+  color: rgba(255,255,255,0.4);
+  font-size: 13px;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 640px) {
+  .login-container {
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  .login-card-glass {
+    padding: 32px 24px;
+  }
+
+  .back-to-landing {
+    top: 16px;
+    left: 16px;
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  .login-header h1 {
+    font-size: 24px;
+  }
+
+  .logo-image {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-options {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+}
